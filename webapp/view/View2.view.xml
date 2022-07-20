@@ -1,0 +1,116 @@
+<mvc:View controllerName="it.orogel.zcalcolopallet.controller.View2"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m"
+    xmlns:ui="sap.ui"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+    xmlns:core="sap.ui.core"
+    xmlns:t="sap.ui.table"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:smartTable="sap.ui.comp.smarttable">
+    <Page navButtonPress="onNavBack" id="page2" title="{i18n>title2}" showNavButton="true">
+        <f:SimpleForm id="_IDGenSimpleForm1" title="" editable="true" labelSpanL="3" labelSpanM="3" labelSpanS="6" layout="ResponsiveGridLayout" columnsM="2" class="sapUiSmallMargin" width="auto" backgroundDesign="Transparent">
+            <core:Title id="_IDGenTitle1" text=""/>
+            <Label id="_IDGenLabel1" text="{i18n>SoldToParty}" design="Bold"/>
+            <Input id ="SoldToPartyInputId" value="{selectedModel>/soldTo}" width="80%" enabled="false"/>
+            <Label id="_IDGenLabel2" text="{i18n>ShipToParty}" design="Bold"/>
+            <Input id ="ShipToPartyInputId" value="{selectedModel>/shipTo}" width="80%" enabled="false"/>
+            <Label id="_IDGenLabel3" text="{i18n>SalesArea}" design="Bold"/>
+            <Input id ="SalesAreaInputId" value="{selectedModel>/salesOrganization}/{selectedModel>/distributionChannel}/{selectedModel>/organizationDivision}" width="80%" enabled="false"/>
+            <core:Title id="_IDGenTitle2" text=""/>
+            <Label id="_IDGenLabel4" text="{i18n>Footboard}" design="Bold"/>
+            <Input id ="FootboardInputId" value='{customerModel>/results/0/ZZ1_PEDANA_BP}' width="80%" enabled="false"/>
+            <Label id="_IDGenLabel5" text="{i18n>Depot}" design="Bold"/>
+            <Input id ="DepotInputId" value='{customerModel>/results/0/ZZ1_HMAX_SAGOME}' width="80%" enabled="false"/>
+            <Label id="_IDGenLabel6" text="{i18n>Shapes}" design="Bold"/>
+            <Input id ="ShapesInputId" value='{customerModel>/results/0/ZZ1_MIN_SAGOME}' width="80%" enabled="false"/>
+            <core:Title id="_IDGenTitle3" text="{i18n>PalletPrv}"/>
+            <Label id="_IDGenLabel7" text="{i18n>PalletNum}" design="Bold"/>
+            <Input id ="PalletNumInputId" value="4" width="80%" enabled="false"/>
+            <Label id="_IDGenLabel9" text="{i18n>IntNum}" design="Bold"/>
+            <Input id ="IntNumInputId" value="2" width="80%" enabled="false"/>
+            <Label id="_IDGenLabel8" text="{i18n>MisNum}" design="Bold"/>
+            <Input id ="MisNumInputId" value="2" width="80%" enabled="false"/>
+            <core:Title id="_IDGenTitle4" text=""/>
+            <Label id="_IDGenLabel11" text="{i18n>ShaNum}" design="Bold"/>
+            <Input id ="ShaNumInputId" value='3' width="80%" enabled="false"/>
+            <Label id="_IDGenLabel10" text="{i18n>TotBox}" design="Bold"/>
+            <Input id ="TotBoxInputId" value='207' width="80%" enabled="false"/>
+            <Label id="_IDGenLabel12" text="{i18n>TotWei}" design="Bold"/>
+            <Input id ="TotWeiInputId" value='1743,1' width="80%" enabled="false"/>
+        </f:SimpleForm>
+        <Table id="idPalletTable" inset="false" class="sapUiSmallMargin" width="auto" alternateRowColors="true" items="{
+			path: 'outputDataModel>/results',
+			sorter: {
+				path: 'ID'
+			}
+		}">
+            <infoToolbar>
+                <Toolbar id="_IDGenToolbar1" active="true">
+                    <Label id="_IDGenLabel21" text="{i18n>palletTable}"/>
+                </Toolbar>
+            </infoToolbar>
+            <columns>
+                <Column id="_IDGenColumn1" minScreenWidth="Tablet" demandPopin="true" hAlign="Center">
+                    <Text id="_IDGenText1" text="{i18n>PalletNum1}" />
+                </Column>
+                <Column id="_IDGenColumn2" minScreenWidth="Tablet" demandPopin="true" hAlign="Center">
+                    <Text id="_IDGenText2" text="{i18n>Height}" />
+                </Column>
+                <Column id="_IDGenColumn3" minScreenWidth="Tablet" demandPopin="true" hAlign="Center">
+                    <Text id="_IDGenText3" text="{i18n>Mixed}" />
+                </Column>
+                <Column id="_IDGenColumn4" minScreenWidth="Tablet" demandPopin="true" hAlign="Center">
+                    <Text id="_IDGenText41" text="{i18n>cardboard}" />
+                </Column>
+                <Column id="_IDGenColumn5" minScreenWidth="Tablet" demandPopin="true" hAlign="Center">
+                    <Text id="_IDGenText5" text="{i18n>Palletization}" />
+                </Column>
+                <Column id="_IDGenColumn6" minScreenWidth="Tablet" demandPopin="true" hAlign="Center">
+                    <Text id="_IDGenText6" text="{i18n>ODV}" />
+                </Column>
+            </columns>
+            <items>
+                <ColumnListItem id="_IDGenColumnListItem1">
+                    <!-- <cells>
+                        <ObjectNumber id="_IDGenObjectNumber1" number="{outputDataModel>AREA}" state="{
+										path: 'outputDataModel>AREA',
+										formatter: '.formatter.formatStatusArea'
+									}" />
+                        <Text id="_IDGenText4" text="{outputDataModel>LABEL}" />
+                        <ObjectNumber id="_IDGenObjectNumber2" number="{outputDataModel>VALUE}" state="{
+										path: 'outputDataModel>AREA',
+										formatter: '.formatter.formatStatus'
+									}"/>
+                    </cells> -->
+                </ColumnListItem>
+            </items>
+        </Table>
+        <VBox id="_IDGenVBox1">
+            <Panel id="_IDGenPanel1">
+                <!--<FlexBox id="_IDGenFlexBox1" direction="Column" alignItems="Start">-->
+                <core:Icon id="_IDGenIcon1" src="sap-icon://bo-strategy-management" class="size1" color="#FF0000">
+                    <core:layoutData>
+                        <FlexItemData id="_IDGenFlexItemData1" growFactor="2" />
+                    </core:layoutData>
+                </core:Icon>
+                <Text id="_IDGenText7" text=" {i18n>text1}: KO"></Text>
+                <FlexBox id="_IDGenFlexBox1" direction="Column" alignItems="Start">
+                </FlexBox>
+                <core:Icon id="_IDGenIcon2" src="sap-icon://bo-strategy-management" class="size1" color="#008000">
+                    <core:layoutData>
+                        <FlexItemData id="_IDGenFlexItemData2" growFactor="1" />
+                    </core:layoutData>
+                </core:Icon>
+                <Text id="_IDGenText8" text=" {i18n>text2}: OK"></Text>
+            </Panel>
+        </VBox>
+
+        <footer>
+            <Bar id="_IDGenBar2">
+                <contentRight>
+                    <Button id="_IDGenButton2" text="{i18n>CreateDelivery}" press="onCreateDelivery" ariaDescribedBy="defaultButtonDescription genericButtonDescription" />
+                </contentRight>
+            </Bar>
+        </footer>
+    </Page>
+</mvc:View>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Calcolo Pallet</title>
+    <style>
+        html, body, body > div, #container, #container-uiarea {
+            height: 100%;
+        }
+    </style>
+    <script
+        id="sap-ui-bootstrap"
+        src="resources/sap-ui-core.js"
+        data-sap-ui-theme="sap_fiori_3"
+        data-sap-ui-resourceroots='{
+            "it.orogel.zcalcolopallet": "./"
+        }'
+        data-sap-ui-compatVersion="edge"
+        data-sap-ui-async="true"
+        data-sap-ui-frameOptions="trusted"
+    ></script>
+    <script id="locate-reuse-libs" src="./utils/locate-reuse-libs.js"
+        data-sap-ui-manifest-uri="./manifest.json"
+        data-sap-ui-componentName="it.orogel.zcalcolopallet">
+    </script> 
+    <!--		<script>
+                sap.ui.getCore().attachInit(function() {
+                    new sap.m.Shell({
+                        appWidthLimited : false, //get rid of letter box layout
+                        app : new sap.ui.core.ComponentContainer({
+                            name : "it.orogel.zcalcolopallet", 
+                            height : "100%",
+                        }) //container path
+                    }).placeAt("content");
+                });
+                </script>-->
+</head>
+<body class="sapUiBody">
+    <div
+        data-sap-ui-component
+        data-name="it.orogel.zcalcolopallet"
+        data-id="container"
+        data-settings='{"id" : "it.orogel.zcalcolopallet"}'
+        data-handle-validation="true"
+        id="content"
+    ></div>
+</body>
+</html>

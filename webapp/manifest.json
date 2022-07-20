@@ -1,0 +1,211 @@
+{
+    "_version": "1.28.0",
+    "sap.app": {
+        "id": "it.orogel.zcalcolopallet",
+        "type": "application",
+        "i18n": "i18n/i18n.properties",
+        "applicationVersion": {
+            "version": "0.0.1"
+        },
+        "title": "{{appTitle}}",
+        "description": "{{appDescription}}",
+        "resources": "resources.json",
+        "sourceTemplate": {
+            "id": "@sap-ux/fiori-freestyle-writer:basic",
+            "version": "0.11.15",
+            "toolsId": "854ff4dc-ffc6-4842-a79e-926bd76ca932"
+        },
+        "dataSources": {
+            "mainService": {
+                "uri": "/sap/opu/odata/sap/ZZ1_CALCOLO_PALLET_2_CDS/",
+                "type": "OData",
+                "settings": {
+                    "annotations": [],
+                    "localUri": "localService/metadata.xml",
+                    "odataVersion": "2.0"
+                }
+            },
+            "customerService": {
+                "uri": "/sap/opu/odata/sap/API_BUSINESS_PARTNER_SRV/",
+                "type": "OData",
+                "settings": {
+                    "annotations": [],
+                    "localUri": "localService/metadata.xml",
+                    "odataVersion": "2.0"
+                }
+            },
+            "palletService": {
+                "uri": "/sap/opu/odata/sap/ZCALCOLOPALLET_SRV",
+                "type": "OData",
+                "settings": {
+                    "annotations": [],
+                    "localUri": "localService/metadata.xml",
+                    "odataVersion": "2.0"
+                }
+            },
+            "localDataSource": {
+                "uri": "",
+                "type": "JSON"
+            }
+        },
+        "crossNavigation": {
+            "inbounds": {
+                "it-orogel-zcalcolopallet-inbound": {
+                    "signature": {
+                        "parameters": {},
+                        "additionalParameters": "allowed"
+                    },
+                    "semanticObject": "zcalcolopallet",
+                    "action": "display",
+                    "title": "{{flpTitle}}",
+                    "subTitle": "{{flpSubtitle}}",
+                    "icon": ""
+                }
+            }
+        }
+    },
+    "sap.ui": {
+        "fullWidth": true,
+        "technology": "UI5",
+        "icons": {
+            "icon": "",
+            "favIcon": "",
+            "phone": "",
+            "phone@2": "",
+            "tablet": "",
+            "tablet@2": ""
+        },
+        "deviceTypes": {
+            "desktop": true,
+            "tablet": true,
+            "phone": true
+        }
+    },
+    "sap.ui5": {
+        "flexEnabled": false,
+        "dependencies": {
+            "minUI5Version": "1.84.7",
+            "libs": {
+                "sap.m": {},
+                "sap.ui.core": {},
+                "sap.f": {},
+                "sap.suite.ui.generic.template": {},
+                "sap.ui.comp": {},
+                "sap.ui.generic.app": {},
+                "sap.ui.table": {},
+                "sap.ushell": {}
+            }
+        },
+        "contentDensities": {
+            "compact": true,
+            "cozy": true
+        },
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "settings": {
+                    "bundleName": "it.orogel.zcalcolopallet.i18n.i18n"
+                }
+            },
+            "appModel": {
+                "type": "sap.ui.model.json.JSONModel",
+                "settings": {},
+                "preload": false
+            },
+            "": {
+                "dataSource": "mainService",
+                "preload": true,
+                "settings": {}
+            },
+            "customerService": {
+                "dataSource": "customerService",
+                "preload": false,
+                "settings": {}
+            },
+            "selectedModel": {
+                "type": "sap.ui.model.json.JSONModel",
+                "dataSource": "localDataSource"
+            },
+            "customerModel": {
+                "type": "sap.ui.model.json.JSONModel",
+                "dataSource": "localDataSource"
+            },
+            "palletService": {
+                "dataSource": "palletService",
+                "preload": false,
+                "settings": {}
+            },
+            "outputDataModel": {
+                "type": "sap.ui.model.json.JSONModel",
+                "dataSource": "localDataSource"
+            },
+            "palletListDataModel": {
+                "type": "sap.ui.model.json.JSONModel",
+                "dataSource": "localDataSource"
+            }
+        },
+        "resources": {
+            "css": [
+                {
+                    "uri": "css/style.css"
+                }
+            ]
+        },
+        "routing": {
+            "config": {
+                "routerClass": "sap.m.routing.Router",
+                "viewType": "XML",
+                "async": true,
+                "viewPath": "it.orogel.zcalcolopallet.view",
+                "controlAggregation": "pages",
+                "controlId": "app",
+                "clearControlAggregation": false
+            },
+            "routes": [
+                {
+                    "name": "TargetView1",
+                    "pattern": "TargetView1",
+                    "target": [
+                        "TargetView1"
+                    ]
+                },
+                {
+                    "name": "TargetView2",
+                    "pattern": "TargetView2",
+                    "target": [
+                        "TargetView2"
+                    ]
+                },
+                {
+                    "name": "default",
+                    "pattern": "",
+                    "target": [
+                        "TargetView1"
+                    ]
+                }
+            ],
+            "targets": {
+                "TargetView1": {
+                    "viewType": "XML",
+                    "transition": "slide",
+                    "clearControlAggregation": false,
+                    "viewId": "View1",
+                    "viewName": "View1"
+                },
+                "TargetView2": {
+                    "viewType": "XML",
+                    "transition": "slide",
+                    "clearControlAggregation": false,
+                    "viewId": "View2",
+                    "viewName": "View2"
+                }
+            }
+        },
+        "rootView": {
+            "viewName": "it.orogel.zcalcolopallet.view.App",
+            "type": "XML",
+            "async": true,
+            "id": "App"
+        }
+    }
+}

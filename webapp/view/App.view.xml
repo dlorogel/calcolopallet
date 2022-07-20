@@ -1,0 +1,9 @@
+<mvc:View controllerName="it.orogel.zcalcolopallet.controller.App"
+    xmlns:html="http://www.w3.org/1999/xhtml"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m">
+    <Shell id="_IDGenShell1" xmlns="sap.m" appWidthLimited="false">
+    <App id="app">
+    </App>
+    </Shell>
+</mvc:View>
