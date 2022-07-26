@@ -108,7 +108,7 @@
         <footer>
             <Bar id="_IDGenBar2">
                 <contentRight>
-                    <Button id="_IDGenButton2" text="{i18n>CreateDelivery}" press="onCreateDelivery" ariaDescribedBy="defaultButtonDescription genericButtonDescription" />
+                    <Button id="_IDGenButton2" text="{i18n>CreateDelivery}" press="onCreateDelivery" ariaDescribedBy="defaultButtonDescription genericButtonDescription" enabled="{selectedModel>/enableButton}"/>
                 </contentRight>
             </Bar>
         </footer>

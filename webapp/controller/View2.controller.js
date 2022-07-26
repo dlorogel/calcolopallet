@@ -61,7 +61,7 @@ sap.ui.define([
                     item.KEY = "KEY";
                     item.SALESORDER = items.items[index].SALESORDER;
                     item.SALESORDERITEM = items.items[index].SALESORDERITEM;
-                    item.OPENQTY = items.items[index].OPENQTY;
+                    item.OPENQTY = items.items[index].OPENQTY.toString();
                     item.UOM = items.items[index].UOM;
 
                     requestBody.PalletListHeadToItemsNAV.push(item);
@@ -78,7 +78,7 @@ sap.ui.define([
                                     if (oData.ReturnSuccessMessage !== "") {
                                         MessageBox.success(this.getView().getModel("i18n").getResourceBundle().getText(oData.ReturnSuccessMessage));
                                     } else {
-                                        MessageBox.error(this.getView().getModel("i18n").getResourceBundle().getText(oData.RETURNMESSAGE));
+                                        MessageBox.error(this.getView().getModel("i18n").getResourceBundle().getText(oData.ReturnMessage));
                                     }
                                 }
                                 else { //error during call

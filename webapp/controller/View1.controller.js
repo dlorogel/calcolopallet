@@ -6,17 +6,19 @@ sap.ui.define([
     "sap/m/Token",
     'sap/ui/model/FilterOperator',
     'sap/ui/model/Filter',
+    "../model/formatter"
 ],
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
      */
-    function (Controller, ODataModel, SearchField, MessageBox, Token, FilterOperator, Filter) {
+    function (Controller, ODataModel, SearchField, MessageBox, Token, FilterOperator, Filter, formatter) {
         "use strict";
 
         _smartFilterBar: null;
         _oModel: null;
 
         return Controller.extend("it.orogel.zcalcolopallet.controller.View1", {
+            formatter: formatter,
             onInit: function () {
                 //this._oModel = this.getView().getModel('mainService');
                 //this.getView().setModel(this._oModel);
@@ -71,8 +73,9 @@ sap.ui.define([
                         }));
                     }
                 }
-                if (this.DataInput !== undefined && this.DataInput !== "") {
+                if (this.DataInput !== undefined && this.DataInput !== "" && !(isNaN(this.DataInput))) {
                     let aDataInputFilter = [];
+                    debugger;
                     aDataInputFilter.push(new Filter("RequestedDeliveryDate", FilterOperator.EQ, this.DataInput));
                     oFinalFilter.aFilters.push(new Filter({
                         filters: aDataInputFilter,
@@ -87,6 +90,12 @@ sap.ui.define([
                     });
                     oFinalFilter.aFilters.push(new Filter({
                         filters: aMultiSalesOrderFilter,
+                        and: false
+                    }));
+                    let aQtyFilter = [];
+                    aQtyFilter.push(new Filter("ConfdOrderQtyByMatlAvailCheck", FilterOperator.NE, 0));
+                    oFinalFilter.aFilters.push(new Filter({
+                        filters: aQtyFilter,
                         and: false
                     }));
                     const oReadCDS = new Promise((resolve, reject) => {
@@ -120,7 +129,7 @@ sap.ui.define([
                     } else if (Number(a.SalesOrderItem) === Number(b.SalesOrderItem)) {
                         if (Number(a.ScheduleLine) > Number(b.ScheduleLine)) {
                             return 1;
-                        }else{
+                        } else {
                             return -1;
                         }
                     } else {
@@ -137,10 +146,13 @@ sap.ui.define([
 
             DataChange: function (oEvent) {
                 this.DataInput = this.getView().byId("DataRichiesta").getValue();
-                //this.DataInput = new Date(this.DataInput);
-                //let timezone = this.DataInput.getTimezoneOffset() / 60;
-                //this.DataInput.setHours(this.DataInput.getHours() - timezone);
+                var dateParts = this.DataInput.split("/");
+                var date = new Date(+dateParts[2], dateParts[1] - 1, +dateParts[0]);
+                this.DataInput = new Date(date);
+                let timezone = this.DataInput.getTimezoneOffset() / 60;
+                this.DataInput.setHours(this.DataInput.getHours() - timezone);
             },
+
             onReset: function () {
                 this.getView().byId("DataRichiesta").setValue("");
                 this.DataInput = "";
@@ -188,6 +200,7 @@ sap.ui.define([
                 var err = false;
                 var warning1 = false;
                 var warning2 = false;
+                var buttonConsegna = true;
                 var selectedItems = {};
                 selectedItems.items = [];
                 var item = {};
@@ -200,9 +213,11 @@ sap.ui.define([
                         //console.log(gettingAllRows[i].getBindingContext().getObject())
                         //row = gettingAllRows[i].getBindingContext().getObject();
                         row = gettingInternalTable.getContextByIndex(i);
+                        if (row.getProperty("OutboundDelivery") !== "") {
+                            buttonConsegna = false;
+                        }
                         //if (i == 0) {
                         if (selectedItems.items.length === 0) {
-                            debugger;
                             shipTo = row.getProperty("ShipToParty");
                             soldTo = row.getProperty("SoldToParty");
                             salesOrganization = row.getProperty("SalesOrganization");
@@ -225,11 +240,12 @@ sap.ui.define([
                             //For Packaging Creation start
                             item.SALESORDER = row.getProperty("SalesOrder");
                             item.SALESORDERITEM = row.getProperty("SalesOrderItem");
-                            item.OPENQTY = row.getProperty("DeliveredQtyInOrderQtyUnit");
+                            //item.OPENQTY = row.getProperty("DeliveredQtyInOrderQtyUnit");
+                            item.OPENQTY = row.getProperty("ConfdOrderQtyByMatlAvailCheck");
                             item.UOM = row.getProperty("OrderQuantityUnit");
                             //For Packaging Creation ends
                             console.log(item);
-                            selectedItems.items.push(item);
+                            selectedItems.items.push(JSON.parse(JSON.stringify(item)));
                         } else {
                             if (shipTo !== row.getProperty("ShipToParty")) {
                                 MessageBox.error(this.getView().getModel("i18n").getResourceBundle().getText("errorShipTo"));
@@ -251,7 +267,7 @@ sap.ui.define([
                             if (salesOrderType !== row.getProperty("SalesOrderType")) {
                                 warning1 = true;
                             }
-                            if (requestedDeliveryDate !== row.getProperty("RequestedDeliveryDate")) {
+                            if (requestedDeliveryDate.getTime() !== row.getProperty("RequestedDeliveryDate").getTime()) {
                                 warning2 = true;
                             }
                             if (err !== true) {
@@ -264,16 +280,27 @@ sap.ui.define([
                                 //For Packaging Creation start
                                 item.SALESORDER = row.getProperty("SalesOrder");
                                 item.SALESORDERITEM = row.getProperty("SalesOrderItem");
-                                item.OPENQTY = row.getProperty("DeliveredQtyInOrderQtyUnit");
+                                //item.OPENQTY = row.getProperty("DeliveredQtyInOrderQtyUnit");
+                                item.OPENQTY = row.getProperty("ConfdOrderQtyByMatlAvailCheck");
                                 item.UOM = row.getProperty("OrderQuantityUnit");
                                 //For Packaging Creation ends
-                                selectedItems.items.push(item);
+                                var trovato = selectedItems.items.find(x => x.SALESORDER === item.SALESORDER && x.SALESORDERITEM === item.SALESORDERITEM);
+                                if (trovato === undefined) {
+                                    selectedItems.items.push(JSON.parse(JSON.stringify(item)));
+                                } else {
+                                    trovato.OPENQTY = parseInt(trovato.OPENQTY) + parseInt(item.OPENQTY);
+                                }
                             }
                         }
                     }
                     //Navigate next page
 
                     var that = this;
+                    if (buttonConsegna) {
+                        selectedModel.setProperty("/enableButton", true);
+                    } else {
+                        selectedModel.setProperty("/enableButton", false);
+                    }
                     if (warning1 == true && err != true) {
                         MessageBox.warning(this.getView().getModel("i18n").getResourceBundle().getText("warningTypeDoc"),
                             {
@@ -312,7 +339,6 @@ sap.ui.define([
 
                                             }
                                         }); //end oData Call Customer info
-
                                         palletListDataModel.setProperty("/items", selectedItems);
                                         that.getView().setModel(palletListDataModel, "palletListDataModel");
                                         that.getOwnerComponent().getRouter().navTo("TargetView2");
@@ -363,7 +389,6 @@ sap.ui.define([
 
                                             }
                                         }); //end oData Call Customer info
-
                                         palletListDataModel.setProperty("/items", selectedItems);
                                         that.getView().setModel(palletListDataModel, "palletListDataModel");
                                         that.getOwnerComponent().getRouter().navTo("TargetView2");
@@ -375,6 +400,7 @@ sap.ui.define([
                     }
 
                     if (err == false && warning1 == false && warning2 == false) {
+                        debugger;
                         palletListDataModel.setProperty("/items", selectedItems);
                         that.getView().setModel(palletListDataModel, "palletListDataModel");
                         that.getOwnerComponent().getRouter().navTo("TargetView2");

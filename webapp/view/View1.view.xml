@@ -47,7 +47,7 @@
                                 </fb:FilterGroupItem>
                                 <fb:FilterGroupItem id="DataRichiestaFilter" groupName="__$INTERNAL$" name="DataRichiesta" label="{i18n>lbl.DataRichiesta}" partOfCurrentVariant="true" visibleInFilterBar="true">
                                     <fb:control>
-                                        <DatePicker id="DataRichiesta" placeholder="" change="DataChange" class="sapUiSmallMarginBottom" valueFormat="dd-MM-yyyy" showFooter="true"/>
+                                        <DatePicker id="DataRichiesta" placeholder="" change="DataChange" class="sapUiSmallMarginBottom" valueFormat="dd/MM/yyyy" showFooter="true"/>
                                     </fb:control>
                                 </fb:FilterGroupItem>
                                 <fb:FilterGroupItem id="PosizioniAperteFilter" groupName="__$INTERNAL$" name="PosizioniAperte" label="{i18n>lbl.PosizioniAperte}" partOfCurrentVariant="true" visibleInFilterBar="true">
@@ -129,13 +129,13 @@
                                 <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="RequestedDeliveryDate" sortProperty="RequestedDeliveryDate" width="100px">
                                     <Label text="{i18n>lbl.RequestedDeliveryDate}"/>
                                     <t:template>
-                                        <Text  text ="{ path:'RequestedDeliveryDate', type:'sap.ui.model.type.Date', formatOptions: { pattern : 'dd-MM-yyyy' } }" />
+                                        <Text  text ="{ path:'RequestedDeliveryDate',  formatter: '.formatter.fmFormatDate'}" />
                                     </t:template>
                                 </t:Column>
-                                <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="Division" sortProperty="Division" width="100px">
-                                    <Label text="{i18n>lbl.Division}"/>
+                                <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="Plant" sortProperty="Plant" width="100px">
+                                    <Label text="{i18n>lbl.Plant}"/>
                                     <t:template>
-                                        <Text text="{Division}" />
+                                        <Text text="{Plant}" />
                                     </t:template>
                                 </t:Column>
                                 <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="SalesOrderItem" sortProperty="SalesOrderItem" width="100px">
@@ -165,7 +165,8 @@
                                 <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="ScheduleLineOrderQuantity" sortProperty="ScheduleLineOrderQuantity" width="100px">
                                     <Label text="{i18n>lbl.ScheduleLineOrderQuantity}"/>
                                     <t:template>
-                                        <Text text="{ScheduleLineOrderQuantity}" />
+                                        <!--<Text text="{ScheduleLineOrderQuantity}" />-->
+                                        <Text text="{OrderQuantity}" />
                                     </t:template>
                                 </t:Column>
                                 <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="OrderQuantityUnit" sortProperty="OrderQuantityUnit" width="100px">
