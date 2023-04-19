@@ -5,7 +5,7 @@
         "type": "application",
         "i18n": "i18n/i18n.properties",
         "applicationVersion": {
-            "version": "0.0.1"
+            "version": "0.0.2"
         },
         "title": "{{appTitle}}",
         "description": "{{appDescription}}",
@@ -36,6 +36,15 @@
             },
             "palletService": {
                 "uri": "/sap/opu/odata/sap/ZCALCOLOPALLET_SRV",
+                "type": "OData",
+                "settings": {
+                    "annotations": [],
+                    "localUri": "localService/metadata.xml",
+                    "odataVersion": "2.0"
+                }
+            },
+            "SalesOrderService": {
+                "uri": "/sap/opu/odata/sap/API_SALES_ORDER_SRV",
                 "type": "OData",
                 "settings": {
                     "annotations": [],
@@ -135,6 +144,11 @@
                 "preload": false,
                 "settings": {}
             },
+            "SalesOrderModel": {
+                "dataSource": "SalesOrderService",
+                "preload": false,
+                "settings": {}
+            },
             "outputDataModel": {
                 "type": "sap.ui.model.json.JSONModel",
                 "dataSource": "localDataSource"
@@ -142,6 +156,11 @@
             "palletListDataModel": {
                 "type": "sap.ui.model.json.JSONModel",
                 "dataSource": "localDataSource"
+            },
+            "detailModel": {
+                "type": "sap.ui.model.json.JSONModel",
+                "settings": {},
+                "preload": false
             }
         },
         "resources": {

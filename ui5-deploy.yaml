@@ -19,4 +19,4 @@ builder:
         app:
           name: ZCALCOLOPALLET
           package: Z001
-          transport: SODK900307
+          transport: SODK902707

@@ -11,9 +11,9 @@
         <f:SimpleForm id="_IDGenSimpleForm1" title="" editable="true" labelSpanL="3" labelSpanM="3" labelSpanS="6" layout="ResponsiveGridLayout" columnsM="2" class="sapUiSmallMargin" width="auto" backgroundDesign="Transparent">
             <core:Title id="_IDGenTitle1" text=""/>
             <Label id="_IDGenLabel1" text="{i18n>SoldToParty}" design="Bold"/>
-            <Input id ="SoldToPartyInputId" value="{selectedModel>/soldTo}" width="80%" enabled="false"/>
+            <Input id ="SoldToPartyInputId" value="{selectedModel>/soldTo} - {selectedModel>/soldToFullName}" width="80%" enabled="false"/>
             <Label id="_IDGenLabel2" text="{i18n>ShipToParty}" design="Bold"/>
-            <Input id ="ShipToPartyInputId" value="{selectedModel>/shipTo}" width="80%" enabled="false"/>
+            <Input id ="ShipToPartyInputId" value="{selectedModel>/shipTo} - {selectedModel>/shipToFullName}" width="80%" enabled="false"/>
             <Label id="_IDGenLabel3" text="{i18n>SalesArea}" design="Bold"/>
             <Input id ="SalesAreaInputId" value="{selectedModel>/salesOrganization}/{selectedModel>/distributionChannel}/{selectedModel>/organizationDivision}" width="80%" enabled="false"/>
             <core:Title id="_IDGenTitle2" text=""/>
@@ -25,21 +25,21 @@
             <Input id ="ShapesInputId" value='{customerModel>/results/0/ZZ1_MIN_SAGOME}' width="80%" enabled="false"/>
             <core:Title id="_IDGenTitle3" text="{i18n>PalletPrv}"/>
             <Label id="_IDGenLabel7" text="{i18n>PalletNum}" design="Bold"/>
-            <Input id ="PalletNumInputId" value="4" width="80%" enabled="false"/>
+            <Input id ="PalletNumInputId" value="{palletListDataModel>/WMS/NumPallet}" width="80%" enabled="false"/>
             <Label id="_IDGenLabel9" text="{i18n>IntNum}" design="Bold"/>
-            <Input id ="IntNumInputId" value="2" width="80%" enabled="false"/>
+            <Input id ="IntNumInputId" value="{palletListDataModel>/WMS/NumInteri}" width="80%" enabled="false"/>
             <Label id="_IDGenLabel8" text="{i18n>MisNum}" design="Bold"/>
-            <Input id ="MisNumInputId" value="2" width="80%" enabled="false"/>
+            <Input id ="MisNumInputId" value="{palletListDataModel>/WMS/NumMisti}" width="80%" enabled="false"/>
             <core:Title id="_IDGenTitle4" text=""/>
             <Label id="_IDGenLabel11" text="{i18n>ShaNum}" design="Bold"/>
-            <Input id ="ShaNumInputId" value='3' width="80%" enabled="false"/>
+            <Input id ="ShaNumInputId" value='{palletListDataModel>/WMS/NumSagome}' width="80%" enabled="false"/>
             <Label id="_IDGenLabel10" text="{i18n>TotBox}" design="Bold"/>
-            <Input id ="TotBoxInputId" value='207' width="80%" enabled="false"/>
+            <Input id ="TotBoxInputId" value='{palletListDataModel>/WMS/TotCartoni}' width="80%" enabled="false"/>
             <Label id="_IDGenLabel12" text="{i18n>TotWei}" design="Bold"/>
-            <Input id ="TotWeiInputId" value='1743,1' width="80%" enabled="false"/>
+            <Input id ="TotWeiInputId" value='{palletListDataModel>/WMS/TotPeso}' width="80%" enabled="false"/>
         </f:SimpleForm>
-        <Table id="idPalletTable" inset="false" class="sapUiSmallMargin" width="auto" alternateRowColors="true" items="{
-			path: 'outputDataModel>/results',
+        <!--<Table id="idPalletTable" inset="false" class="sapUiSmallMargin" width="auto" alternateRowColors="true" items="{
+			path: 'palletListDataModel>/WMS/Posizioni',
 			sorter: {
 				path: 'ID'
 			}
@@ -70,8 +70,8 @@
                 </Column>
             </columns>
             <items>
-                <ColumnListItem id="_IDGenColumnListItem1">
-                    <!-- <cells>
+                <ColumnListItem id="_IDGenColumnListItem1">-->
+        <!-- <cells>
                         <ObjectNumber id="_IDGenObjectNumber1" number="{outputDataModel>AREA}" state="{
 										path: 'outputDataModel>AREA',
 										formatter: '.formatter.formatStatusArea'
@@ -82,26 +82,66 @@
 										formatter: '.formatter.formatStatus'
 									}"/>
                     </cells> -->
-                </ColumnListItem>
+        <!--</ColumnListItem>
             </items>
-        </Table>
+        </Table>-->
+        <t:Table id="TabellaPallet" rows="{appModel>/pallet}" selectionMode="None" visibleRowCountMode="Interactive" ariaLabelledBy="title" enableCellFilter="true" enableGrouping="true">
+            <t:columns>
+                <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="PalletNumero" sortProperty="PalletNumero">
+                    <Label text="{i18n>PalletNum1}"/>
+                    <t:template>
+                        <Text text="{PalletNumero}"/>
+                    </t:template>
+                </t:Column>
+                <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="Altezza" sortProperty="Altezza">
+                    <Label text="{i18n>Height}"/>
+                    <t:template>
+                        <Text text="{Altezza}" />
+                    </t:template>
+                </t:Column>
+                <t:Column hAlign="Begin" resizable="true" autoResizable="true" width="5em">
+                    <Label text="{i18n>Mixed}"/>
+                    <t:template>
+                        <core:Icon src="{ path:'Misto',  formatter: '.formatter.fmIconChange'}" color="#E11A1A"/>
+                    </t:template>
+                </t:Column>
+                <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="NumCartoni" sortProperty="NumCartoni">
+                    <Label text="{i18n>cardboard}"/>
+                    <t:template>
+                        <Text text="{NumCartoni}" />
+                    </t:template>
+                </t:Column>
+                <t:Column hAlign="Begin" resizable="true" autoResizable="true" width="10em">
+                    <Label text="{i18n>Palletization}"/>
+                    <t:template>
+                        <Button icon="sap-icon://dimension" tooltip="{i18n>Palletization}" press="onOpenPalletization" enabled="{enablePalletization}"/>
+                    </t:template>
+                </t:Column>
+                <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="NumOrdine" sortProperty="NumOrdine">
+                    <Label text="{i18n>ODV}"/>
+                    <t:template>
+                        <Text  text ="{NumOrdine}" />
+                    </t:template>
+                </t:Column>
+            </t:columns>
+        </t:Table>
         <VBox id="_IDGenVBox1">
             <Panel id="_IDGenPanel1">
                 <!--<FlexBox id="_IDGenFlexBox1" direction="Column" alignItems="Start">-->
-                <core:Icon id="_IDGenIcon1" src="sap-icon://bo-strategy-management" class="size1" color="#FF0000">
+                <core:Icon id="_IDGenIcon1" src="sap-icon://bo-strategy-management" class="size1" color="{=${appModel>/checkNumMinimoSagome} === 'OK' ? '#00FF00' : '#FF0000'}">
                     <core:layoutData>
                         <FlexItemData id="_IDGenFlexItemData1" growFactor="2" />
                     </core:layoutData>
                 </core:Icon>
-                <Text id="_IDGenText7" text=" {i18n>text1}: KO"></Text>
+                <Text id="_IDGenText7" text=" {i18n>text1}: {appModel>/checkNumMinimoSagome}" class="sapUiTinyMarginBegin"></Text>
                 <FlexBox id="_IDGenFlexBox1" direction="Column" alignItems="Start">
                 </FlexBox>
-                <core:Icon id="_IDGenIcon2" src="sap-icon://bo-strategy-management" class="size1" color="#008000">
+                <core:Icon id="_IDGenIcon2" src="sap-icon://bo-strategy-management" class="size1" color="{=${appModel>/checkPeso} === 'OK' ? '#00FF00' : '#FF0000'}">
                     <core:layoutData>
                         <FlexItemData id="_IDGenFlexItemData2" growFactor="1" />
                     </core:layoutData>
                 </core:Icon>
-                <Text id="_IDGenText8" text=" {i18n>text2}: OK"></Text>
+                <Text id="_IDGenText8" text=" {i18n>text2}: {appModel>/checkPeso}" class="sapUiTinyMarginBegin"></Text>
             </Panel>
         </VBox>
 

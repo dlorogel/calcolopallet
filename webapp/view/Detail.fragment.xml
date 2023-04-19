@@ -1,0 +1,56 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:ui="sap.ui"
+    xmlns:t="sap.ui.table"
+    xmlns:l="sap.ui.layout">
+    <Dialog title="Pallet N° {appModel>/NamePallet}" afterClose="onAfterCloseDialog">
+        <content>
+            <t:Table id="TabellaPallettizzazione" rows="{appModel>/pallettizzazione}" selectionMode="None" visibleRowCountMode="Auto" ariaLabelledBy="title" enableCellFilter="true" enableGrouping="true">
+                <t:columns>
+                    <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="Material" sortProperty="Material" width="10em">
+                        <Label text="{i18n>Material}"/>
+                        <t:template>
+                            <Text text="{Materiale}"/>
+                        </t:template>
+                    </t:Column>
+                    <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="MaterialDescription" sortProperty="MaterialDescription" width="20em">
+                        <Label text="{i18n>MaterialDescription}"/>
+                        <t:template>
+                            <Text text="{MaterialDescription}"/>
+                        </t:template>
+                    </t:Column>
+                    <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="Altezza" sortProperty="Altezza" width="10em">
+                        <Label text="{i18n>QtaStrato}"/>
+                        <t:template>
+                            <Text text="{QtaStrato}" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column hAlign="Begin" resizable="true" autoResizable="true" width="10em">
+                        <Label text="{i18n>NumStrati}"/>
+                        <t:template>
+                            <Text text="{NumStrati}" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="NumCartoni" sortProperty="NumCartoni" width="10em">
+                        <Label text="{i18n>UnitaDiMisura}"/>
+                        <t:template>
+                            <Text text="{UnitaDiMisura}" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="TotaleCartoniStrati" sortProperty="TotaleCartoniStrati" width="10em">
+                        <Label text="{i18n>TotaleCartoniStrati}"/>
+                        <t:template>
+                            <Text text="{TotaleCartoniStrati}" />
+                        </t:template>
+                    </t:Column>
+                </t:columns>
+            </t:Table>
+        </content>
+        <beginButton></beginButton>
+        <ToolbarSeparator/>
+        <endButton>
+            <Button text="Chiudi" type="Emphasized" press="onCloseDialog"/>
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>

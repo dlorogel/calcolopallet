@@ -12,8 +12,8 @@
         <App id="app">
             <pages>
                 <Page id="page" title="{i18n>title}">
-                   <!-- <VBox id="_IDGenVBox1" fitContainer="true" > -->
-                        <!--<smartFilterBar:SmartFilterBar id="smartFilterBar" persistencyKey="UniqueAndStablePersistencyKey" considerSelectionVariants="false" entitySet="ZZ1_Calcolo_Pallet_2" enableBasicSearch="false" basicSearchFieldName="SalesOrder" search="onSearch" showClearButton="true">
+                    <!-- <VBox id="_IDGenVBox1" fitContainer="true"> -->
+                    <!--<smartFilterBar:SmartFilterBar id="smartFilterBar" persistencyKey="UniqueAndStablePersistencyKey" considerSelectionVariants="false" entitySet="ZZ1_Calcolo_Pallet_2" enableBasicSearch="false" basicSearchFieldName="SalesOrder" search="onSearch" showClearButton="true">
 
                             <smartFilterBar:layoutData>
                                 <FlexItemData id="_IDGenFlexItemData1" shrinkFactor="0"/>
@@ -38,175 +38,183 @@
                                 <FlexItemData id="_IDGenFlexItemData2" growFactor="1" baseSize="0%"/>
                             </smartTable:layoutData>
                         </smartTable:SmartTable>!-->
-                        <fb:FilterBar clear="onReset" search="onSearch" showRestoreButton="false" showClearButton="false" showClearOnFB="true" deltaVariantMode="false">
-                            <fb:filterGroupItems>
-                                <fb:FilterGroupItem id="NumeroOrdineFilter" groupName="__$INTERNAL$" name="NumeroOrdineFilter" label="{i18n>lbl.NumeroOrdine}" partOfCurrentVariant="true" visibleInFilterBar="true">
-                                    <fb:control>
-                                        <MultiInput id="NumeroOrdineInput" class="customHeightInput" required="true" showValueHelp="false"></MultiInput>
-                                    </fb:control>
-                                </fb:FilterGroupItem>
-                                <fb:FilterGroupItem id="DataRichiestaFilter" groupName="__$INTERNAL$" name="DataRichiesta" label="{i18n>lbl.DataRichiesta}" partOfCurrentVariant="true" visibleInFilterBar="true">
-                                    <fb:control>
-                                        <DatePicker id="DataRichiesta" placeholder="" change="DataChange" class="sapUiSmallMarginBottom" valueFormat="dd/MM/yyyy" showFooter="true"/>
-                                    </fb:control>
-                                </fb:FilterGroupItem>
-                                <fb:FilterGroupItem id="PosizioniAperteFilter" groupName="__$INTERNAL$" name="PosizioniAperte" label="{i18n>lbl.PosizioniAperte}" partOfCurrentVariant="true" visibleInFilterBar="true">
-                                    <fb:control>
-                                        <ComboBox id="PosizioniAperte"
-                                            xmlns="sap.m">
-                                            <items>
-                                                <core:Item xmlns:core="sap.ui.core" key="1" text="Solo Posizioni Aperte" />
-                                                <core:Item xmlns:core="sap.ui.core" key="2" text="Solo Posizioni Chiuse" />
-                                                <core:Item xmlns:core="sap.ui.core" key="3" text="Tutte le posizioni" />
-                                            </items>
-                                        </ComboBox>
-                                    </fb:control>
-                                </fb:FilterGroupItem>
-                            </fb:filterGroupItems>
-                        </fb:FilterBar>
-                        <t:Table id="TabellaOrdini" rows="{appModel>/ordini}" selectionMode="MultiToggle" visibleRowCountMode="Auto" ariaLabelledBy="title" enableCellFilter="true" enableSelectAll="true">
-                            <t:columns>
-                                <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="SalesOrder" sortProperty="SalesOrder" width="100px">
-                                    <Label text="{i18n>lbl.SalesOrder}"/>
-                                    <t:template>
-                                        <Text text="{SalesOrder}"/>
-                                    </t:template>
-                                </t:Column>
-                                <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="SalesOrderType" sortProperty="SalesOrderType" width="100px">
-                                    <Label text="{i18n>lbl.SalesOrderType}"/>
-                                    <t:template>
-                                        <Text text="{SalesOrderType}"/>
-                                    </t:template>
-                                </t:Column>
-                                <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="SalesOrderDate" sortProperty="SalesOrderDate" width="100px">
-                                    <Label text="{i18n>lbl.SalesOrderDate}"/>
-                                    <t:template>
-                                        <Text  text ="{ path:'SalesOrderDate', type:'sap.ui.model.type.Date', formatOptions: { pattern : 'dd-MM-yyyy' } }" />
-                                    </t:template>
-                                </t:Column>
-                                <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="SoldToParty" sortProperty="SoldToParty" width="100px">
-                                    <Label text="{i18n>lbl.SoldToParty}"/>
-                                    <t:template>
-                                        <Text text="{SoldToParty}" />
-                                    </t:template>
-                                </t:Column>
-                                <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="SoldToPartyFullName" sortProperty="SoldToPartyFullName" width="300px">
-                                    <Label text="{i18n>lbl.SoldToPartyFullName}"/>
-                                    <t:template>
-                                        <Text text="{SoldToPartyFullName}"/>
-                                    </t:template>
-                                </t:Column>
-                                <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="ShipToParty" sortProperty="ShipToParty" width="100px">
-                                    <Label text="{i18n>lbl.ShipToParty}"/>
-                                    <t:template>
-                                        <Text text="{ShipToParty}" />
-                                    </t:template>
-                                </t:Column>
-                                <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="ShipToPartyFullName" sortProperty="ShipToPartyFullName" width="300px">
-                                    <Label text="{i18n>lbl.ShipToPartyFullName}"/>
-                                    <t:template>
-                                        <Text text="{ShipToPartyFullName}"/>
-                                    </t:template>
-                                </t:Column>
-                                <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="SalesOrganization" sortProperty="SalesOrganization" width="100px">
-                                    <Label text="{i18n>lbl.SalesOrganization}"/>
-                                    <t:template>
-                                        <Text text="{SalesOrganization}"/>
-                                    </t:template>
-                                </t:Column>
-                                <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="DistributionChannel" sortProperty="DistributionChannel" width="100px">
-                                    <Label text="{i18n>lbl.DistributionChannel}"/>
-                                    <t:template>
-                                        <Text text="{DistributionChannel}"/>
-                                    </t:template>
-                                </t:Column>
-                                <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="OrganizationDivision" sortProperty="OrganizationDivision" width="100px">
-                                    <Label text="{i18n>lbl.OrganizationDivision}"/>
-                                    <t:template>
-                                        <Text text="{OrganizationDivision}" />
-                                    </t:template>
-                                </t:Column>
-                                <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="RequestedDeliveryDate" sortProperty="RequestedDeliveryDate" width="100px">
-                                    <Label text="{i18n>lbl.RequestedDeliveryDate}"/>
-                                    <t:template>
-                                        <Text  text ="{ path:'RequestedDeliveryDate',  formatter: '.formatter.fmFormatDate'}" />
-                                    </t:template>
-                                </t:Column>
-                                <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="Plant" sortProperty="Plant" width="100px">
-                                    <Label text="{i18n>lbl.Plant}"/>
-                                    <t:template>
-                                        <Text text="{Plant}" />
-                                    </t:template>
-                                </t:Column>
-                                <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="SalesOrderItem" sortProperty="SalesOrderItem" width="100px">
-                                    <Label text="{i18n>lbl.SalesOrderItem}"/>
-                                    <t:template>
-                                        <Text text="{SalesOrderItem}" />
-                                    </t:template>
-                                </t:Column>
-                                <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="Material" sortProperty="Material" width="100px">
-                                    <Label text="{i18n>lbl.Material}"/>
-                                    <t:template>
-                                        <Text text="{Material}" />
-                                    </t:template>
-                                </t:Column>
-                                <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="ScheduleLine" sortProperty="ScheduleLine" width="100px">
-                                    <Label text="{i18n>lbl.ScheduleLine}"/>
-                                    <t:template>
-                                        <Text text="{ScheduleLine}" />
-                                    </t:template>
-                                </t:Column>
-                                <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="ConfirmedDeliveryDate" sortProperty="SalesOrderItem" width="100px">
-                                    <Label text="{i18n>lbl.ConfirmedDeliveryDate}"/>
-                                    <t:template>
-                                        <Text  text ="{ path:'ConfirmedDeliveryDate', type:'sap.ui.model.type.Date', formatOptions: { pattern : 'dd-MM-yyyy' } }" />
-                                    </t:template>
-                                </t:Column>
-                                <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="ScheduleLineOrderQuantity" sortProperty="ScheduleLineOrderQuantity" width="100px">
-                                    <Label text="{i18n>lbl.ScheduleLineOrderQuantity}"/>
-                                    <t:template>
-                                        <!--<Text text="{ScheduleLineOrderQuantity}" />-->
-                                        <Text text="{OrderQuantity}" />
-                                    </t:template>
-                                </t:Column>
-                                <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="OrderQuantityUnit" sortProperty="OrderQuantityUnit" width="100px">
-                                    <Label text="{i18n>lbl.OrderQuantityUnit}"/>
-                                    <t:template>
-                                        <Text text="{OrderQuantityUnit}" />
-                                    </t:template>
-                                </t:Column>
-                                <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="ConfdOrderQtyByMatlAvailCheck" sortProperty="ConfdOrderQtyByMatlAvailCheck" width="100px">
-                                    <Label text="{i18n>lbl.ConfdOrderQtyByMatlAvailCheck}"/>
-                                    <t:template>
-                                        <Text text="{ConfdOrderQtyByMatlAvailCheck}" />
-                                    </t:template>
-                                </t:Column>
-                                <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="DeliveredQtyInOrderQtyUnit" sortProperty="DeliveredQtyInOrderQtyUnit" width="100px">
-                                    <Label text="{i18n>lbl.DeliveredQtyInOrderQtyUnit}"/>
-                                    <t:template>
-                                        <Text text="{DeliveredQtyInOrderQtyUnit}" />
-                                    </t:template>
-                                </t:Column>
-                                <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="OpenConfdDelivQtyInOrdQtyUnit" sortProperty="OpenConfdDelivQtyInOrdQtyUnit" width="100px">
-                                    <Label text="{i18n>lbl.OpenConfdDelivQtyInOrdQtyUnit}"/>
-                                    <t:template>
-                                        <Text text="{OpenConfdDelivQtyInOrdQtyUnit}" />
-                                    </t:template>
-                                </t:Column>
-                                <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="OutboundDelivery" sortProperty="OutboundDelivery" width="100px">
-                                    <Label text="{i18n>lbl.OutboundDelivery}"/>
-                                    <t:template>
-                                        <Text text="{OutboundDelivery}" />
-                                    </t:template>
-                                </t:Column>
-                                <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="SalesOrderItemText" sortProperty="SalesOrderItemText" width="500px">
-                                    <Label text="{i18n>lbl.SalesOrderItemText}"/>
-                                    <t:template>
-                                        <Text text="{SalesOrderItemText}" />
-                                    </t:template>
-                                </t:Column>
-                            </t:columns>
-                        </t:Table>
+                    <fb:FilterBar clear="onReset" search="onSearch" showRestoreButton="false" showClearButton="false" showClearOnFB="true" deltaVariantMode="false">
+                        <fb:filterGroupItems>
+                            <fb:FilterGroupItem id="NumeroOrdineFilter" groupName="__$INTERNAL$" name="NumeroOrdineFilter" label="{i18n>lbl.NumeroOrdine}" partOfCurrentVariant="true" visibleInFilterBar="true">
+                                <fb:control>
+                                    <MultiInput id="NumeroOrdineInput" class="customHeightInput" required="true" showValueHelp="false"></MultiInput>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                            <!--<fb:FilterGroupItem id="DataRichiestaFilter" groupName="__$INTERNAL$" name="DataRichiesta" label="{i18n>lbl.DataRichiesta}" partOfCurrentVariant="true" visibleInFilterBar="true">
+                                <fb:control>
+                                    <DatePicker id="DataRichiesta" placeholder="" change="DataChange" class="sapUiSmallMarginBottom" valueFormat="dd/MM/yyyy" showFooter="true"/>
+                                </fb:control>
+                            </fb:FilterGroupItem>-->
+                            <fb:FilterGroupItem id="PosizioniAperteFilter" groupName="__$INTERNAL$" name="PosizioniAperte" label="{i18n>lbl.PosizioniAperte}" partOfCurrentVariant="true" visibleInFilterBar="true">
+                                <fb:control>
+                                    <ComboBox id="PosizioniAperte"
+                                        xmlns="sap.m">
+                                        <items>
+                                            <core:Item xmlns:core="sap.ui.core" key="1" text="Solo Posizioni Aperte" />
+                                            <core:Item xmlns:core="sap.ui.core" key="2" text="Solo Posizioni Chiuse" />
+                                            <core:Item xmlns:core="sap.ui.core" key="3" text="Tutte le posizioni" />
+                                        </items>
+                                    </ComboBox>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                        </fb:filterGroupItems>
+                    </fb:FilterBar>
+                    <t:Table id="TabellaOrdini" rows="{appModel>/ordini}" selectionMode="MultiToggle" visibleRowCountMode="Interactive" ariaLabelledBy="title" enableCellFilter="true" enableSelectAll="true" enableGrouping="true">
+                        <t:columns>
+                            <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="SalesOrder" sortProperty="SalesOrder" width="100px">
+                                <Label text="{i18n>lbl.SalesOrder}"/>
+                                <t:template>
+                                    <Text text="{SalesOrder}"/>
+                                    <!--<Link text="{SalesOrder}" href="{LinkSalesOrder}"/>-->
+                                </t:template>
+                            </t:Column>
+
+                            <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="SoldToParty" sortProperty="SoldToParty" width="100px">
+                                <Label text="{i18n>lbl.SoldToParty}"/>
+                                <t:template>
+                                    <Text text="{SoldToParty}" />
+                                </t:template>
+                            </t:Column>
+                            <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="SoldToPartyFullName" sortProperty="SoldToPartyFullName" width="300px">
+                                <Label text="{i18n>lbl.SoldToPartyFullName}"/>
+                                <t:template>
+                                    <Text text="{SoldToPartyFullName}"/>
+                                </t:template>
+                            </t:Column>
+                            <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="ShipToParty" sortProperty="ShipToParty" width="100px">
+                                <Label text="{i18n>lbl.ShipToParty}"/>
+                                <t:template>
+                                    <Text text="{ShipToParty}" />
+                                </t:template>
+                            </t:Column>
+                            <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="ShipToPartyFullName" sortProperty="ShipToPartyFullName" width="300px">
+                                <Label text="{i18n>lbl.ShipToPartyFullName}"/>
+                                <t:template>
+                                    <Text text="{ShipToPartyFullName}"/>
+                                </t:template>
+                            </t:Column>
+
+                            <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="RequestedDeliveryDate" sortProperty="RequestedDeliveryDate" width="100px">
+                                <Label text="{i18n>lbl.RequestedDeliveryDate}"/>
+                                <t:template>
+                                    <Text  text ="{ path:'RequestedDeliveryDate',  formatter: '.formatter.fmFormatDate'}" />
+                                </t:template>
+                            </t:Column>
+                            <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="Material" sortProperty="Material" width="100px">
+                                <Label text="{i18n>lbl.Material}"/>
+                                <t:template>
+                                    <Text text="{Material}" />
+                                </t:template>
+                            </t:Column>
+                            <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="SalesOrderItemText" sortProperty="SalesOrderItemText" width="500px">
+                                <Label text="{i18n>lbl.SalesOrderItemText}"/>
+                                <t:template>
+                                    <Text text="{SalesOrderItemText}" />
+                                </t:template>
+                            </t:Column>
+                            <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="SalesOrderItem" sortProperty="SalesOrderItem" width="100px">
+                                <Label text="{i18n>lbl.SalesOrderItem}"/>
+                                <t:template>
+                                    <Text text="{SalesOrderItem}" />
+                                </t:template>
+                            </t:Column>
+                            <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="ScheduleLine" sortProperty="ScheduleLine" width="100px">
+                                <Label text="{i18n>lbl.ScheduleLine}"/>
+                                <t:template>
+                                    <Text text="{ScheduleLine}" />
+                                </t:template>
+                            </t:Column>
+                            <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="ConfirmedDeliveryDate" sortProperty="SalesOrderItem" width="100px">
+                                <Label text="{i18n>lbl.ConfirmedDeliveryDate}"/>
+                                <t:template>
+                                    <Text  text ="{ path:'ConfirmedDeliveryDate', type:'sap.ui.model.type.Date', formatOptions: { pattern : 'dd-MM-yyyy' } }" />
+                                </t:template>
+                            </t:Column>
+                            <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="ScheduleLineOrderQuantity" sortProperty="ScheduleLineOrderQuantity" width="100px">
+                                <Label text="{i18n>lbl.ScheduleLineOrderQuantity}"/>
+                                <t:template>
+                                    <!--<Text text="{ScheduleLineOrderQuantity}" />-->
+                                    <!--<Text text="{OrderQuantity}" />-->
+                                    <Text text ="{ path:'OrderQuantity',  formatter: '.formatter.fmNumber'}" />
+                                </t:template>
+                            </t:Column>
+                            <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="OrderQuantityUnit" sortProperty="OrderQuantityUnit" width="100px">
+                                <Label text="{i18n>lbl.OrderQuantityUnit}"/>
+                                <t:template>
+                                    <Text text="{OrderQuantityUnit}" />
+                                </t:template>
+                            </t:Column>
+                            <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="ConfdOrderQtyByMatlAvailCheck" sortProperty="ConfdOrderQtyByMatlAvailCheck" width="100px">
+                                <Label text="{i18n>lbl.ConfdOrderQtyByMatlAvailCheck}"/>
+                                <t:template>
+                                    <!--<Text text="{ConfdOrderQtyByMatlAvailCheck}" />-->
+                                    <Text text ="{ path:'ConfdOrderQtyByMatlAvailCheck',  formatter: '.formatter.fmNumber'}" />
+                                </t:template>
+                            </t:Column>
+
+                            <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="OutboundDelivery" sortProperty="OutboundDelivery" width="100px">
+                                <Label text="{i18n>lbl.OutboundDelivery}"/>
+                                <t:template>
+                                    <!--<Text text="{OutboundDelivery}" />-->
+                                    <Link text="{OutboundDelivery}" href="{LinkOutboundDelivery}"/>
+                                </t:template>
+                            </t:Column>
+                            <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="DeliveredQtyInOrderQtyUnit" sortProperty="DeliveredQtyInOrderQtyUnit" width="100px">
+                                <Label text="{i18n>lbl.DeliveredQtyInOrderQtyUnit}"/>
+                                <t:template>
+                                    <Text text="{DeliveredQtyInOrderQtyUnit}" />
+                                </t:template>
+                            </t:Column>
+                            <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="OpenConfdDelivQtyInOrdQtyUnit" sortProperty="OpenConfdDelivQtyInOrdQtyUnit" width="100px">
+                                <Label text="{i18n>lbl.OpenConfdDelivQtyInOrdQtyUnit}"/>
+                                <t:template>
+                                    <!--<Text text="{OpenConfdDelivQtyInOrdQtyUnit}" />-->
+                                    <Text text ="{ path:'OpenConfdDelivQtyInOrdQtyUnit',  formatter: '.formatter.fmNumber'}" />
+                                </t:template>
+                            </t:Column>
+                            <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="SalesOrderType" sortProperty="SalesOrderType" width="100px">
+                                <Label text="{i18n>lbl.SalesOrderType}"/>
+                                <t:template>
+                                    <Text text="{SalesOrderType}"/>
+                                </t:template>
+                            </t:Column>
+                            <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="SalesOrderDate" sortProperty="SalesOrderDate" width="100px">
+                                <Label text="{i18n>lbl.SalesOrderDate}"/>
+                                <t:template>
+                                    <Text  text ="{ path:'SalesOrderDate', type:'sap.ui.model.type.Date', formatOptions: { pattern : 'dd-MM-yyyy' } }" />
+                                </t:template>
+                            </t:Column>
+                            <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="SalesOrganization" sortProperty="SalesOrganization" width="100px">
+                                <Label text="{i18n>lbl.SalesOrganization}"/>
+                                <t:template>
+                                    <Text text="{SalesOrganization}"/>
+                                </t:template>
+                            </t:Column>
+                            <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="DistributionChannel" sortProperty="DistributionChannel" width="100px">
+                                <Label text="{i18n>lbl.DistributionChannel}"/>
+                                <t:template>
+                                    <Text text="{DistributionChannel}"/>
+                                </t:template>
+                            </t:Column>
+                            <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="OrganizationDivision" sortProperty="OrganizationDivision" width="100px">
+                                <Label text="{i18n>lbl.OrganizationDivision}"/>
+                                <t:template>
+                                    <Text text="{OrganizationDivision}" />
+                                </t:template>
+                            </t:Column>
+                            <t:Column hAlign="Begin" resizable="true" autoResizable="true" filterProperty="Plant" sortProperty="Plant" width="100px">
+                                <Label text="{i18n>lbl.Plant}"/>
+                                <t:template>
+                                    <Text text="{Plant}" />
+                                </t:template>
+                            </t:Column>
+                        </t:columns>
+                    </t:Table>
                     <!--</VBox>-->
                     <footer>
                         <Bar id="_IDGenBar1">

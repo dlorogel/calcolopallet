@@ -11,6 +11,18 @@ sap.ui.define([], function () {
             });
             return dateFormat.format(new Date(date));
         },
+        fmNumber: function (number) {
+            if (!number) return "";
+            return parseInt(number).toString();
+        },
+        fmIconChange: function (Misto) {
+            if (Misto) {
+                return "sap-icon://accept";
+            } else {
+                //return "sap-icon://error";
+                return "";
+            }
+        }
 
     };
 

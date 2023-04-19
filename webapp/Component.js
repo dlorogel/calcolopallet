@@ -33,6 +33,12 @@ sap.ui.define([
         oAppComponent.prototype.getRicerca = function () {
             return this.Ricerca;
         };
+        oAppComponent.prototype.setError = function (Error) {
+            this.Error = Error;
+        };
+        oAppComponent.prototype.getError = function () {
+            return this.Error;
+        };
         oAppComponent.prototype.resetAllBusy = function () {
             Object.keys(this._oBusyControl).forEach((sId) => {
                 const oControl = sap.ui.getCore().byId(sId);
